@@ -1,4 +1,4 @@
-# 💬 **Gemini ChatBot** – A Conversational AI Journey 🌟
+# 💬 **Gemini ChatBot** – A Conversational AI Journey 
 
 Welcome to **SachinPCD's Gemini ChatBot**! This project is a demonstration of the power of conversational AI, built to enhance JavaScript skills by integrating the **Gemini API** to provide dynamic, AI-generated responses in a chatbot format.
 
@@ -51,4 +51,4 @@ This project previously included sensitive information such as API keys in the c
 
 ## 💬 **Contact**
 - **Email**: gandusachin937@gmail.com
-- **Instagram**: sachin_pcd_937
+- **Instagram**: Links: [Instagram](https://www.instagram.com/sachin_pcd_937/)
