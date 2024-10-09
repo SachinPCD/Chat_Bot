@@ -9,24 +9,24 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body style="background-color: #32161f">
     <h1 align="center">SachinPCD</h1>
     <center>
       <div class="main-container">
         <div class="chatbot-header"><b>ChatBot</b></div>
         <div class="chatbot-body">
-          <div class="message bot">Hello there ,how can help?</div>
+          <div class="innerone">
+            <img src="bot.svg" class="iconss" alt="" />
+            <div class="message bot">Hello there ,how can help?</div>
+          </div>
         </div>
         <div class="chatbot-footer">
           <input placeholder="Type a message" id="input-text" type="text" />
-          <button
-            type="button"
-            onclick="chatbotActive()"
-            class="btn btn-secondary"
-          >
-            Send
-          </button>
+          <button type="submit" onclick="chatbotActive()">Send</button>
         </div>
       </div>
     </center>
@@ -35,23 +35,47 @@
     function chatbotActive() {
       let API_URL =
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyAMZBx6Ae8fQ2yJXOD2FVWWHQxuaJCpiNw";
-      let API_KEy = "Your API";
+      let API_KEy = "AIzaSyAMZBx6Ae8fQ2yJXOD2FVWWHQxuaJCpiNw";
       const input = document.getElementById("input-text");
       let message = input.value.trim();
       const chatbotBody = document.getElementsByClassName("chatbot-body")[0];
+      const innerOner = document.getElementsByClassName("innerone");
 
       if (message !== "") {
+        const userContainer = document.createElement("div");
+        userContainer.classList.add("innerone");
+        
+        const userImage = document.createElement("img");
+        userImage.src = "user.svg"; 
+        userImage.alt = "User";
+        
         const userMessage = document.createElement("div");
         userMessage.classList.add("message", "user");
         userMessage.textContent = message;
-        chatbotBody.appendChild(userMessage);
+        // chatbotBody.appendChild(userMessage);
+        userContainer.appendChild(userMessage);
+        userContainer.appendChild(userImage);
+        chatbotBody.appendChild(userContainer);
         input.value = "";
 
         setTimeout(() => {
+          const userContainer = document.createElement("div");
+        userContainer.classList.add("innerone");
+        
+        const userEmage = document.createElement("img");
+        userEmage.src = "bot.svg"; 
+        userEmage.alt = "Bot";
+        
+
           const chatbotMessage = document.createElement("div");
           chatbotMessage.classList.add("message", "bot");
-          chatbotMessage.textContent = "bot is typing...";
-          chatbotBody.appendChild(chatbotMessage);
+          chatbotMessage.textContent = ".....";
+          const userImage = document.createElement("img");
+          userImage.src = "bot.svg";
+          userImage.alt = "Bot";
+          userContainer.appendChild(userImage);
+          userContainer.appendChild(chatbotMessage);
+          chatbotBody.appendChild(userContainer);
           chatbotBody.scrollTop = chatbotBody.scrollHeight;
 
           setTimeout(() => {
@@ -70,14 +94,17 @@
             fetch(API_URL, requestOptions)
               .then((res) => res.json())
               .then((data) => {
-                const chatbotres= document.querySelector(".message.bot");
-                chatbotMessage.textContent = data?.candidates[0].content.parts[0].text.replace(/\*\*(.*?)\*\*/g, '$1');
-                // chatbotMessage.textContent=data.candidates[0].content.parts[0].text; 
-                const height = chatbotBody.scrollHeight; // Get the new height of chatbot body
-                chatbotBody.style.height = height + 'px';
-            })
+                const chatbotres = document.querySelector(".message.bot");
+                chatbotMessage.textContent =
+                  data?.candidates[0].content.parts[0].text.replace(
+                    /\*\*(.*?)\*\*/g,
+                    "$1"
+                  );
+                const height = chatbotBody.scrollHeight;
+                chatbotBody.style.height = height + "px";
+              })
               .catch((error) => {
-                chatbotres.innerHTML="Opps try again PCD!!"
+                chatbotres.innerHTML = "Opps try again PCD!!";
               });
             chatbotBody.scrollTop = chatbotBody.scrollHeight;
           }, 1000);
